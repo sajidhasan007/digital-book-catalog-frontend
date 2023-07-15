@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Modal, Button, message, Rate } from 'antd';
 import { Form, useForm } from 'react-hook-form';
+import { RateControl, TextareaControl } from './controls';
 
 interface IData {
   rate: number;
@@ -65,7 +66,7 @@ export const WriteReview: FC<IWriteReview> = ({
             <div className="mb-6 flex justify-between items-center">
               <p className="text-base"> Rate this book</p>
               <div className="text-sm">
-                <Rate disabled value={4} />
+                <RateControl name="rate" control={control} />
               </div>
             </div>
             <div className="mb-6 ">

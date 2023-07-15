@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { SignupForm } from '../components/SignUpForm';
 import { Link } from 'react-router-dom';
-import logo from '../assets/images/technet-logo-white.png';
+import logo from '../assets/images/book_logo.png';
 
 export default function Signup() {
   return (
@@ -22,12 +22,15 @@ export default function Signup() {
             className="absolute inset-0 bg-cover"
             style={{
               backgroundImage:
-                'url(https://images.unsplash.com/photo-1590069261209-f8e9b8642343?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80)',
+                'url(https://images.pexels.com/photos/1907785/pexels-photo-1907785.jpeg?auto=compress&cs=tinysrgb&w=600)',
             }}
           />
-          <div className="relative z-20 flex items-center text-lg font-medium">
-            <img className="h-8" src={logo} alt="" />
-          </div>
+          <Link to="/">
+            <div className="relative z-20 flex items-center text-lg font-medium">
+              <img className="h-8" src={logo} alt="" />
+            </div>
+          </Link>
+
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2"></blockquote>
           </div>

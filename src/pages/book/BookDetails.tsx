@@ -2,8 +2,14 @@ import Footer from '@/layouts/Footer';
 import noImage from '@/assets/images/noImage.png';
 import { ReviewCard } from '@/components/ReviewCard';
 import { Button } from 'antd';
+import { WriteReview } from '@/components/WriteReviewModal';
+import { useState } from 'react';
 
 export default function BookDetails() {
+  const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+  const reviewToggleFilterModal = () => {
+    setIsReviewModalVisible(!isReviewModalVisible);
+  };
   const book = {
     _id: 'dslfhgsdklfgjhdk',
     title: 'The art of thinking clearly',
@@ -48,12 +54,23 @@ export default function BookDetails() {
             <h1 className="text-2xl font-black text-primary mb-2">
               Review & Ratting
             </h1>
-            <Button>Write a Review</Button>
+            <Button
+              onClick={() => {
+                reviewToggleFilterModal();
+              }}
+            >
+              Write a Review
+            </Button>
           </div>
           <div>
             <ReviewCard review={{}} />
           </div>
         </div>
+        <WriteReview
+          isModalVisible={isReviewModalVisible}
+          toggleModal={reviewToggleFilterModal}
+          slug={'kjhkh'}
+        />
       </div>
       <Footer />
     </>
