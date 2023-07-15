@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '@/assets/images/technet-logo-white.png';
+import logo from '@/assets/images/book_logo.png';
 import { RiFacebookBoxFill, RiInstagramLine } from 'react-icons/ri';
 export default function Footer() {
   const date = new Date();
@@ -13,8 +13,8 @@ export default function Footer() {
         </div>
         <div className="flex gap-20">
           <ul className="space-y-2">
-            <li>Upcoming</li>
-            <li>Shipping</li>
+            <li>All Books</li>
+            <li>Favourite list</li>
             <li>How it works</li>
           </ul>
           <ul className="space-y-2">
