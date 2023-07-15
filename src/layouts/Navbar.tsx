@@ -1,18 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Button } from '../components/ui/button';
-import { DropdownMenuSeparator } from '../components/ui/dropdown-menu';
-import { DropdownMenuLabel } from '../components/ui/dropdown-menu';
-import {
-  DropdownMenuItem,
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-} from '../components/ui/dropdown-menu';
-import { HiOutlineSearch } from 'react-icons/hi';
-import Cart from '../components/Cart';
 import logo from '../assets/images/book_logo.png';
-
 export default function Navbar() {
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
@@ -35,12 +23,17 @@ export default function Navbar() {
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/">Sign In</Link>
+                  <Link to="/signup">Signup</Link>
                 </Button>
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/All Books">Sign Up</Link>
+                  <Link to="/login">Login</Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link to="/All Books">LogOut</Link>
                 </Button>
               </li>
             </ul>

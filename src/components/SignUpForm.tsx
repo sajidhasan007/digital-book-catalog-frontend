@@ -12,6 +12,9 @@ import { FcGoogle } from 'react-icons/fc';
 type UserAuthFormProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface SignupFormInputs {
+  name: string;
+  phoneNumber: string;
+  address: string;
   email: string;
   password: string;
 }
@@ -32,6 +35,62 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
+            <div>
+              <Label className="sr-only" htmlFor="email">
+                Name
+              </Label>
+              <Input
+                id="name"
+                placeholder="e.g: Sajid hasan"
+                type="text"
+                autoCapitalize="none"
+                {...register('name', { required: 'Name is required' })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div>
+              <Label className="sr-only" htmlFor="name">
+                Name
+              </Label>
+              <Input
+                id="name"
+                placeholder="e.g: Sajid hasan"
+                type="text"
+                autoCapitalize="none"
+                {...register('name', { required: 'Name is required' })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div>
+              <Label className="sr-only" htmlFor="phoneNumber">
+                Phone Number
+              </Label>
+              <Input
+                id="phoneNumber"
+                placeholder="e.g: 01*******60"
+                type="text"
+                autoCapitalize="none"
+                {...register('phoneNumber', {
+                  required: 'Phone Number is required',
+                })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+
+            <div>
+              <Label className="sr-only" htmlFor="address">
+                Address
+              </Label>
+              <Input
+                id="address"
+                placeholder="e.g: Dhaka, Bangladesh"
+                type="text"
+                autoCapitalize="none"
+                {...register('address', { required: 'Address is required' })}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+
             <Label className="sr-only" htmlFor="email">
               Email
             </Label>
@@ -65,24 +124,6 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
           <Button>Create Account</Button>
         </div>
       </form>
-      <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-      </div>
-      <Button
-        variant="outline"
-        type="button"
-        className="flex items-center justify-between"
-      >
-        <p>Google</p>
-        <FcGoogle />
-      </Button>
     </div>
   );
 }
