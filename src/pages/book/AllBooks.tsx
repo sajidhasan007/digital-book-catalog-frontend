@@ -1,11 +1,9 @@
 import { Button } from '@/components/ui/button';
-import banner from '@/assets/images/banner.png';
-import hero from '@/assets/images/hero.png';
 import { Link } from 'react-router-dom';
 import Footer from '@/layouts/Footer';
 import { BookCard } from '@/components/BookCard';
 
-export default function Home() {
+export default function Allbooks() {
   return (
     <>
       <div className="content-container ">
@@ -20,11 +18,6 @@ export default function Home() {
               publicationDate: '1955-04-10',
             }}
           />
-          <div className="flex flex-col items-center justify-center">
-            <Button className="mt-10" asChild>
-              <Link to="/products">Brows all products</Link>
-            </Button>
-          </div>
         </div>
       </div>
       <Footer />

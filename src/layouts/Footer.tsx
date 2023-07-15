@@ -15,10 +15,10 @@ export default function Footer() {
           <ul className="space-y-2">
             <li>All Books</li>
             <li>Favourite list</li>
-            <li>How it works</li>
+            <li>Ho to borrow books</li>
           </ul>
           <ul className="space-y-2">
-            <li>Support</li>
+            <li>About us</li>
             <li>Careers</li>
           </ul>
           <ul className="space-y-2">
@@ -34,7 +34,7 @@ export default function Footer() {
       <div className="flex w-full mt-20 gap-5">
         <p>Privacy Policy</p>
         <p>Terms & Condition</p>
-        <p className="ml-auto"> &#169; TechNet {year}</p>
+        <p className="ml-auto"> &#169; Sajid Hasan {year}</p>
       </div>
     </div>
   );
