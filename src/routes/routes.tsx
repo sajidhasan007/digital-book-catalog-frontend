@@ -17,7 +17,7 @@ const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/book',
+        path: '/all-books',
         element: <Allbooks />,
       },
       {

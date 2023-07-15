@@ -1,7 +1,9 @@
-import { FC, useEffect, useState } from 'react';
-import { Modal, Button, message, Rate } from 'antd';
-import { Form, useForm } from 'react-hook-form';
+import { FC } from 'react';
+import { Modal, Button, message, Spin } from 'antd';
+import { useForm } from 'react-hook-form';
 import { RateControl, TextareaControl } from './controls';
+import { useCreateReviewMutation } from '@/redux/features/books/bookApi';
+import { LoadingOutlined } from '@ant-design/icons';
 
 interface IData {
   rate: number;
@@ -11,12 +13,12 @@ interface IData {
 interface IWriteReview {
   isModalVisible?: boolean;
   toggleModal?: () => void;
-  slug: string;
+  bookId: string | undefined;
 }
 export const WriteReview: FC<IWriteReview> = ({
   isModalVisible,
   toggleModal,
-  slug,
+  bookId,
 }) => {
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -45,9 +47,23 @@ export const WriteReview: FC<IWriteReview> = ({
     },
   });
 
-  const onSubmit = async (data: IData) => {
-    console.log('data is = ', data);
+  const [createReview, { data, isSuccess, isLoading }] =
+    useCreateReviewMutation();
+
+  if (isSuccess) {
+    toggleModal!();
+  }
+
+  const onSubmit = (formData: IData) => {
+    const data = {
+      ...formData,
+      book: bookId,
+    };
+    createReview(data);
   };
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 24, color: 'white' }} spin />
+  );
 
   return (
     <>
@@ -61,12 +77,12 @@ export const WriteReview: FC<IWriteReview> = ({
         width={630}
       >
         <div className="py-16 px-24">
-          <h1 className="section-title text-center mb-8">Write a Review</h1>
+          <h1 className="text-lg font-bold text-center mb-8">Write a Review</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-6 flex justify-between items-center">
               <p className="text-base"> Rate this book</p>
               <div className="text-sm">
-                <RateControl name="rate" control={control} />
+                <RateControl name="review" control={control} />
               </div>
             </div>
             <div className="mb-6 ">
@@ -80,7 +96,7 @@ export const WriteReview: FC<IWriteReview> = ({
               className="button-secondary w-full"
               htmlType="submit"
             >
-              Submit
+              {isLoading ? <Spin indicator={antIcon} /> : 'Submit'}
             </Button>
           </form>
         </div>

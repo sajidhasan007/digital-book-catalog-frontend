@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '@/assets/images/book_logo.png';
 import { RiFacebookBoxFill, RiInstagramLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 export default function Footer() {
   const date = new Date();
   const year = date.getFullYear();
@@ -8,9 +9,11 @@ export default function Footer() {
   return (
     <div className="bg-[#242630] text-secondary p-20">
       <div className="flex justify-between">
-        <div>
-          <img className="h-10" src={logo} alt="Logo" />
-        </div>
+        <Link to="/">
+          <div className="cursor-pointer">
+            <img src={logo} height={50} width={50} alt="Book catalog logo" />
+          </div>
+        </Link>
         <div className="flex gap-20">
           <ul className="space-y-2">
             <li>All Books</li>

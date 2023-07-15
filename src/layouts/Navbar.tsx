@@ -10,9 +10,11 @@ export default function Navbar() {
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
       <div className="h-full w-full bg-white/60">
         <div className="flex items-center justify-between w-full md:max-w-7xl h-full mx-auto ">
-          <div className="cursor-pointer">
-            <img src={logo} height={50} width={50} alt="Book catalog logo" />
-          </div>
+          <Link to="/">
+            <div className="cursor-pointer">
+              <img src={logo} height={50} width={50} alt="Book catalog logo" />
+            </div>
+          </Link>
           <div>
             <ul className="flex items-center">
               <li>
@@ -22,7 +24,7 @@ export default function Navbar() {
               </li>
               <li>
                 <Button variant="link" asChild>
-                  <Link to="/All Books">Products</Link>
+                  <Link to="/all-books">All Books</Link>
                 </Button>
               </li>
               <li>
