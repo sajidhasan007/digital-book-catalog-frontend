@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import logo from '../assets/images/book_logo.png';
+import Cookies from 'js-cookie';
+
 export default function Navbar() {
+  const userToken = Cookies.get('token');
+  const userName = Cookies.get('name');
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
       <div className="h-full w-full bg-white/60">
@@ -26,16 +30,19 @@ export default function Navbar() {
                   <Link to="/signup">Signup</Link>
                 </Button>
               </li>
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/login">Login</Link>
-                </Button>
-              </li>
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/All Books">LogOut</Link>
-                </Button>
-              </li>
+              {!userToken ? (
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/login">Login</Link>
+                  </Button>
+                </li>
+              ) : (
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/All Books">LogOut</Link>
+                  </Button>
+                </li>
+              )}
             </ul>
           </div>
         </div>

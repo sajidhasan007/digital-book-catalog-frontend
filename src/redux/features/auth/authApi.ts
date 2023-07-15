@@ -3,17 +3,17 @@ import { api } from '@/redux/api/apiSlice';
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
-      query: ({ data }) => ({
-        url: `/login`,
+      query: (data) => ({
+        url: `auth/login`,
         method: 'POST',
-        body: data,
+        body: { ...data },
       }),
     }),
     signup: builder.mutation({
-      query: ({ data }) => ({
-        url: `/signup`,
+      query: (data) => ({
+        url: `users/register`,
         method: 'POST',
-        body: data,
+        body: { ...data },
       }),
     }),
   }),
