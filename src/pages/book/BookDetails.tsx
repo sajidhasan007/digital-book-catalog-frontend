@@ -28,8 +28,6 @@ export default function BookDetails() {
   const { data: review, isLoading: isReviewLoading } =
     useGetBookReviewQuery(id);
 
-  console.log('my review are = ', review?.data);
-
   if (isLoading) {
     return (
       <div className="w-full h-screen flex justify-center items-center">

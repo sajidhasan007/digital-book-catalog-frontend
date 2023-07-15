@@ -47,13 +47,16 @@ export const WriteReview: FC<IWriteReview> = ({
     },
   });
 
-  const [createReview, { data, isSuccess, isLoading }] =
+  const [createReview, { data, isSuccess, error, isLoading }] =
     useCreateReviewMutation();
 
   if (isSuccess) {
     toggleModal!();
   }
 
+  // if (error?.data) {
+  //   errorMsg(error?.data?.message);
+  // }
   const onSubmit = (formData: IData) => {
     const data = {
       ...formData,
