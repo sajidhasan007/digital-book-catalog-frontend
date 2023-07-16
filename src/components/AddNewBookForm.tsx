@@ -8,7 +8,7 @@ import {
   useUpdateBookMutation,
 } from '@/redux/features/books/bookApi';
 import { LoadingOutlined } from '@ant-design/icons';
-import { option } from '@/types/globalTypes';
+import { genreOptions, option } from '@/types/globalTypes';
 import dayjs from 'dayjs';
 import { Navigate } from 'react-router-dom';
 
@@ -108,14 +108,6 @@ export const AddNewBookForm: FC<IWriteReview> = ({
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: 'white' }} spin />
   );
-
-  const genreOptions: option[] = [
-    { value: 'Drama', label: 'Drama' },
-    { value: 'Motivation', label: 'Motivation' },
-    { value: 'Comedy', label: 'Comedy' },
-    { value: 'Fiction', label: 'Fiction' },
-    { value: 'Romantic', label: 'Romantic' },
-  ];
 
   return (
     <>

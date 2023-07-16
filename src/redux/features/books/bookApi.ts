@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 const bookApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBooks: builder.query({
-      query: () => '/book',
+      query: (params: any) => ({ url: '/book', params }),
       providesTags: ['bookList'],
     }),
     singleBook: builder.query({
