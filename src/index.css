@@ -90,3 +90,8 @@
   padding-left: 100px;
   padding-right: 100px;
 }
+
+.ant-btn-primary {
+  background-color: blue;
+  color: white;
+}

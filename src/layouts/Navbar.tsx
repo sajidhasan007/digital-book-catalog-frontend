@@ -39,11 +39,18 @@ export default function Navbar() {
                   </Button>
                 </li>
               ) : (
-                <li>
-                  <Button variant="link" asChild>
-                    <Link to="/All Books">LogOut</Link>
-                  </Button>
-                </li>
+                <>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/add-new-book">Add New Book</Link>
+                    </Button>
+                  </li>
+                  <li>
+                    <Button variant="link" asChild>
+                      <Link to="/logout">LogOut</Link>
+                    </Button>
+                  </li>
+                </>
               )}
             </ul>
           </div>

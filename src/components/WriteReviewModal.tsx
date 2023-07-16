@@ -51,6 +51,7 @@ export const WriteReview: FC<IWriteReview> = ({
     useCreateReviewMutation();
 
   if (isSuccess) {
+    successMsg('Review added successfully');
     toggleModal!();
   }
 
@@ -78,6 +79,7 @@ export const WriteReview: FC<IWriteReview> = ({
         onCancel={toggleModal}
         className="check-availability"
         width={630}
+        footer={null}
       >
         <div className="py-16 px-24">
           <h1 className="text-lg font-bold text-center mb-8">Write a Review</h1>
