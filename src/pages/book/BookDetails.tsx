@@ -6,11 +6,14 @@ import { WriteReview } from '@/components/WriteReviewModal';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  useDleteBookMutation,
   useGetBookReviewQuery,
   useSingleBookQuery,
 } from '@/redux/features/books/bookApi';
 import { AddNewBookForm } from '@/components/AddNewBookForm';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import dayjs from 'dayjs';
+import { Navigate } from 'react-router-dom';
 
 export default function BookDetails() {
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
@@ -25,6 +28,10 @@ export default function BookDetails() {
   };
 
   const { data: book, isLoading } = useSingleBookQuery(id);
+  const [
+    deleteBook,
+    { data: deleteData, isSuccess: deleteSuccess, isLoading: deleteLoading },
+  ] = useDleteBookMutation();
   const { data: review, isLoading: isReviewLoading } =
     useGetBookReviewQuery(id);
 
@@ -36,8 +43,13 @@ export default function BookDetails() {
     );
   }
 
+  if (deleteSuccess) {
+    return <Navigate to="/" replace={true} />;
+    console.log('success');
+  }
+
   const handleDelete = (id: string | undefined) => {
-    console.log('delete click', id);
+    deleteBook(id);
   };
 
   return (
@@ -98,7 +110,10 @@ export default function BookDetails() {
                   <hr />
                   <p>Genre: {book?.data?.genre}</p>
                   <hr />
-                  <p>Publiction Date: {book?.data?.publicationDate}</p>
+                  <p>
+                    Publiction Date:
+                    {dayjs(book?.data?.publicationDate).format('YYYY-MM-DD')}
+                  </p>
                   <hr />
                 </div>
               </div>
@@ -143,7 +158,11 @@ export default function BookDetails() {
           width={630}
           footer={null}
         >
-          <AddNewBookForm isUpdate={true} />
+          <AddNewBookForm
+            isUpdate={true}
+            bookId={id}
+            setIsModalOpen={toggleModal}
+          />
         </Modal>
       </div>
       <Footer />

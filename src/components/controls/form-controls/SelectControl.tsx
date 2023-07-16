@@ -1,7 +1,7 @@
-import { FC, useState, useEffect } from "react";
-import { Controller } from "react-hook-form";
-import { Select } from "antd";
-import { option } from "@/lib/model";
+import { FC, useState, useEffect } from 'react';
+import { Controller } from 'react-hook-form';
+import { Select } from 'antd';
+import { option } from '@/types/globalTypes';
 
 const { Option } = Select;
 
@@ -28,9 +28,9 @@ export const SelectControl: FC<SelectControlProps> = ({
   errors,
   msg,
   disabled = false,
-  placeholder = "",
-  className = "",
-  width = "w-full ",
+  placeholder = '',
+  className = '',
+  width = 'w-full ',
   onChangeOption,
   showSearch = true,
 }) => {
@@ -53,13 +53,13 @@ export const SelectControl: FC<SelectControlProps> = ({
         render={({ field }) => (
           <Select
             {...field}
-            mode={multiple ? "multiple" : undefined}
+            mode={multiple ? 'multiple' : undefined}
             disabled={disabled}
             className={`w-full h-11  ${width} placeholder:!text-xs ${className}`}
-            status={errMsg && "error"}
+            status={errMsg && 'error'}
             size="large"
             allowClear={false}
-            placeholder={placeholder || "this is placeholder message"}
+            placeholder={placeholder || 'this is placeholder message'}
             bordered
             onChange={(e) => {
               onChangeOption && onChangeOption(e);
@@ -83,7 +83,7 @@ export const SelectControl: FC<SelectControlProps> = ({
       />
       <p
         className={`text-red-600 text-xs ${
-          msg && "-bottom-3 left-1"
+          msg && '-bottom-3 left-1'
         } text-xs block `}
       >
         {errMsg}

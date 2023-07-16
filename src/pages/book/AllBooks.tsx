@@ -21,7 +21,7 @@ export default function Allbooks() {
           <h1 className="text-2xl font-black text-primary mb-4">All Books</h1>
           <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-4">
             {data?.data.map((book: IBook) => (
-              <BookCard book={book} />
+              <BookCard key={book?._id} book={book} />
             ))}
           </div>
         </div>

@@ -5,3 +5,8 @@ export interface IBook {
   genre: string;
   publicationDate: string;
 }
+
+export interface option {
+  value: string | number;
+  label: string | number;
+}

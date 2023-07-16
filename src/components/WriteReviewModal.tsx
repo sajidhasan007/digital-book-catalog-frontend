@@ -6,7 +6,7 @@ import { useCreateReviewMutation } from '@/redux/features/books/bookApi';
 import { LoadingOutlined } from '@ant-design/icons';
 
 interface IData {
-  rate: number;
+  review: number;
   comment: string;
 }
 
@@ -36,14 +36,12 @@ export const WriteReview: FC<IWriteReview> = ({
   };
   const {
     control,
-    watch,
     handleSubmit,
-    reset,
     formState: { isValid, isDirty },
   } = useForm({
     defaultValues: {
       comment: '',
-      rate: NaN,
+      review: NaN,
     },
   });
 

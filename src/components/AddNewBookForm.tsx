@@ -1,21 +1,34 @@
-import { FC } from 'react';
-import { Modal, Button, message, Spin } from 'antd';
+import { FC, useEffect } from 'react';
+import { Button, message, Spin } from 'antd';
 import { useForm } from 'react-hook-form';
-import { Input, RateControl, TextareaControl } from './controls';
-import { useCreateReviewMutation } from '@/redux/features/books/bookApi';
+import { DatePicker, Input, Select } from './controls';
+import {
+  useCreateBookMutation,
+  useSingleBookQuery,
+  useUpdateBookMutation,
+} from '@/redux/features/books/bookApi';
 import { LoadingOutlined } from '@ant-design/icons';
+import { option } from '@/types/globalTypes';
+import dayjs from 'dayjs';
+import { Navigate } from 'react-router-dom';
 
 interface IBook {
   title: string;
   author: string;
-  genre: string;
-  publicationDate: string;
+  genre: option[] | null;
+  publicationDate: Date;
 }
 
 interface IWriteReview {
   isUpdate?: boolean;
+  bookId?: string | undefined;
+  setIsModalOpen?: any;
 }
-export const AddNewBookForm: FC<IWriteReview> = ({ isUpdate = false }) => {
+export const AddNewBookForm: FC<IWriteReview> = ({
+  isUpdate = false,
+  bookId,
+  setIsModalOpen,
+}) => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const successMsg = (msg: string) => {
@@ -30,6 +43,7 @@ export const AddNewBookForm: FC<IWriteReview> = ({ isUpdate = false }) => {
       content: msg,
     });
   };
+
   const {
     control,
     watch,
@@ -40,32 +54,68 @@ export const AddNewBookForm: FC<IWriteReview> = ({ isUpdate = false }) => {
     defaultValues: {
       title: '',
       author: '',
-      genre: '',
-      publicationDate: '',
+      genre: null,
+      publicationDate: new Date(),
     },
   });
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { data: bookDetails } = useSingleBookQuery(bookId);
 
-  const [createReview, { data, isSuccess, error, isLoading }] =
-    useCreateReviewMutation();
+  useEffect(() => {
+    if (isUpdate) {
+      reset({
+        title: bookDetails?.data?.title,
+        author: bookDetails?.data?.author,
+        genre: bookDetails?.data?.genre,
+        publicationDate: new Date(bookDetails?.data?.publicationDate),
+      });
+    }
+  }, []); // Add an empty dependency array
+
+  const [createBook, { data, isSuccess, error, isLoading }] =
+    useCreateBookMutation();
+  const [
+    updateBook,
+    { data: updateData, isSuccess: updateSuccess, isLoading: updateLoading },
+  ] = useUpdateBookMutation();
 
   if (isSuccess) {
     successMsg('Book added successfully');
-    // toggleModal!();
+    return <Navigate to="/" replace={true} />;
   }
 
-  // if (error?.data) {
-  //   errorMsg(error?.data?.message);
-  // }
+  if (updateSuccess) {
+    successMsg('Book update successfully');
+  }
+
   const onSubmit = (formData: IBook) => {
-    const data = {
-      ...formData,
-      //   book: bookId,
-    };
-    createReview(data);
+    // return;
+
+    if (isUpdate) {
+      const data = {
+        data: { ...formData },
+        id: bookId,
+      };
+      updateBook(data);
+      setIsModalOpen();
+    } else {
+      const data = {
+        ...formData,
+      };
+      createBook(data);
+    }
   };
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: 'white' }} spin />
   );
+
+  const genreOptions: option[] = [
+    { value: 'Drama', label: 'Drama' },
+    { value: 'Motivation', label: 'Motivation' },
+    { value: 'Comedy', label: 'Comedy' },
+    { value: 'Fiction', label: 'Fiction' },
+    { value: 'Romantic', label: 'Romantic' },
+  ];
 
   return (
     <>
@@ -103,16 +153,26 @@ export const AddNewBookForm: FC<IWriteReview> = ({ isUpdate = false }) => {
           <div className="mb-6 flex flex-col">
             <p className="text-base mb-2">Genre</p>
             <div className="text-sm">
-              <Input name="genre" control={control} placeholder="e.g Drama" />
+              <Select
+                name="genre"
+                control={control}
+                placeholder="Select your Genre"
+                options={genreOptions}
+              />
             </div>
           </div>
           <div className="mb-6 flex flex-col">
             <p className="text-base mb-2">Publication Date</p>
             <div className="text-sm">
-              <Input
+              {/* <Input
                 name="publicationDate"
                 control={control}
                 placeholder="e.g 2023-01-01"
+              /> */}
+              <DatePicker
+                name="publicationDate"
+                control={control}
+                placeholder="Select Publication Date"
               />
             </div>
           </div>

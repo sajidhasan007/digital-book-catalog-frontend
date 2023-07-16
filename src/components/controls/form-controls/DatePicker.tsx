@@ -4,13 +4,6 @@ import type { RangePickerProps } from 'antd/es/date-picker';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 
-const disabledDate: RangePickerProps['disabledDate'] = (current) => {
-  return dayjs() <= current;
-};
-
-const disabledForAduldDate: RangePickerProps['disabledDate'] = (current) => {
-  return dayjs().add(-18, 'years') < current;
-};
 interface DatePickerProps {
   name: string;
   control: any;
@@ -22,6 +15,7 @@ interface DatePickerProps {
   className?: string;
   allowClear?: boolean;
   checkAdult?: boolean;
+  showTime?: boolean;
   onChangeField?: () => void;
 }
 export const DatePickerControl: FC<DatePickerProps> = ({
@@ -35,6 +29,7 @@ export const DatePickerControl: FC<DatePickerProps> = ({
   className = '',
   allowClear = false,
   checkAdult = false,
+  showTime = false,
   onChangeField,
 }) => {
   const errMsg = errors?.[name]?.message;
@@ -48,19 +43,21 @@ export const DatePickerControl: FC<DatePickerProps> = ({
             allowClear={allowClear}
             {...field}
             id={name}
-            defaultValue={defaultValue}
+            // defaultValue={defaultValue}
             className={`!rounded-xs my-1 w-full ${className}`}
             status={errMsg && 'error'}
             size="large"
             disabled={disabled}
             placeholder={placeholder}
+            value={field.value ? dayjs(field.value) : null}
             placement={'bottomLeft'}
-            format={'YYYY-MM-DD'}
+            format={'MM-D-YYYY h:mm'}
             onChange={(e) => {
               onChangeField && onChangeField();
-              field.onChange(e);
+              field.onChange(e ? e.toDate() : null);
             }}
-            disabledDate={checkAdult ? disabledForAduldDate : disabledDate}
+            // disabledDate={checkAdult ? disabledForAduldDate : disabledDate}
+            showTime={showTime}
           />
         )}
       />
@@ -68,4 +65,3 @@ export const DatePickerControl: FC<DatePickerProps> = ({
     </div>
   );
 };
-

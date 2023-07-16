@@ -4,7 +4,7 @@ import { AddNewBookForm } from '@/components/AddNewBookForm';
 import { Spin } from 'antd';
 
 export default function AddNewBook() {
-  const { data, isLoading, error } = useGetBooksQuery(undefined);
+  const { data, isLoading, isSuccess } = useGetBooksQuery(undefined);
 
   if (isLoading) {
     return (
