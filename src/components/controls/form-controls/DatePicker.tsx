@@ -44,6 +44,7 @@ export const DatePickerControl: FC<DatePickerProps> = ({
             {...field}
             id={name}
             // defaultValue={defaultValue}
+            picker="year"
             className={`!rounded-xs my-1 w-full ${className}`}
             status={errMsg && 'error'}
             size="large"
@@ -57,7 +58,6 @@ export const DatePickerControl: FC<DatePickerProps> = ({
               field.onChange(e ? e.toDate() : null);
             }}
             // disabledDate={checkAdult ? disabledForAduldDate : disabledDate}
-            showTime={showTime}
           />
         )}
       />

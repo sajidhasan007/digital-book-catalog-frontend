@@ -4,7 +4,7 @@ import { useGetBooksQuery } from '@/redux/features/books/bookApi';
 import { Spin } from 'antd';
 import { genreOptions, IBook } from '@/types/globalTypes';
 import { useForm } from 'react-hook-form';
-import { SearchControl, Select } from '@/components/controls';
+import { DatePicker, SearchControl, Select } from '@/components/controls';
 import { useEffect } from 'react';
 
 export default function Allbooks() {
@@ -16,6 +16,10 @@ export default function Allbooks() {
   });
   const genre = watch('genre');
   const search = watch('search');
+  const param = {
+    searchTerm: search,
+    genre: genre && genre,
+  };
   const { data, isLoading, error } = useGetBooksQuery({
     searchTerm: search,
     genre: genre,
@@ -30,15 +34,11 @@ export default function Allbooks() {
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    console.log(search);
-    console.log(genre);
-  }, [genre, search]);
 
   return (
     <>
       <div className="content-container">
-        <div className="mt-6 flex flex-col md:flex-row justify-between gap-6">
+        <div className="mt-6 flex flex-col md:flex-row justify-between gap-4 items-center">
           <SearchControl
             name="search"
             control={control}
@@ -49,6 +49,11 @@ export default function Allbooks() {
             control={control}
             placeholder="Select your Genre"
             options={genreOptions}
+          />
+          <DatePicker
+            name="publicationDate"
+            control={control}
+            placeholder="Select your Genre"
           />
         </div>
         <div className="mb-32 mt-10">

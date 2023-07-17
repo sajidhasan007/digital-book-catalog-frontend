@@ -12,7 +12,7 @@ export interface option {
 }
 
 export const genreOptions: option[] = [
-  { value: null, label: 'All' },
+  { value: '', label: 'All' },
   { value: 'Drama', label: 'Drama' },
   { value: 'Motivation', label: 'Motivation' },
   { value: 'Comedy', label: 'Comedy' },
