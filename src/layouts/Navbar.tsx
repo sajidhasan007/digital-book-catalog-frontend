@@ -2,10 +2,19 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import logo from '../assets/images/book_logo.png';
 import Cookies from 'js-cookie';
+import { useState } from 'react';
 
 export default function Navbar() {
   const userToken = Cookies.get('token');
   const userName = Cookies.get('name');
+  const [token, setToken] = useState<string | null>(
+    Cookies.get('token') as string
+  );
+  const logOut = () => {
+    // console.log('log out ');
+    Cookies.remove('token');
+    setToken(null);
+  };
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10">
       <div className="h-full w-full bg-white/60">
@@ -46,8 +55,13 @@ export default function Navbar() {
                     </Button>
                   </li>
                   <li>
-                    <Button variant="link" asChild>
-                      <Link to="/logout">LogOut</Link>
+                    <Button
+                      onClick={() => {
+                        logOut();
+                      }}
+                      className="bg-red-600 text-white p-5"
+                    >
+                      LogOut
                     </Button>
                   </li>
                 </>
