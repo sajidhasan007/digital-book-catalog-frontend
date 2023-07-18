@@ -6,24 +6,27 @@ import { genreOptions, IBook } from '@/types/globalTypes';
 import { useForm } from 'react-hook-form';
 import { DatePicker, SearchControl, Select } from '@/components/controls';
 import { useEffect } from 'react';
+import { removeFalsyValues } from '@/lib/utils';
+import dayjs from 'dayjs';
 
 export default function Allbooks() {
   const { control, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       genre: null,
-      search: '',
+      searchTerm: '',
+      publicationDate: '',
     },
   });
   const genre = watch('genre');
-  const search = watch('search');
+  const searchTerm = watch('searchTerm');
+  const publicationDate = watch('publicationDate');
   const param = {
-    searchTerm: search,
-    genre: genre && genre,
+    searchTerm,
+    genre,
+    publicationDate: publicationDate && dayjs(publicationDate).format('YYYY'),
   };
-  const { data, isLoading, error } = useGetBooksQuery({
-    searchTerm: search,
-    genre: genre,
-  });
+  const newParams = removeFalsyValues(param);
+  const { data, isLoading, error } = useGetBooksQuery(newParams);
 
   if (isLoading) {
     return (
@@ -40,7 +43,7 @@ export default function Allbooks() {
       <div className="content-container">
         <div className="mt-6 flex flex-col md:flex-row justify-between gap-4 items-center">
           <SearchControl
-            name="search"
+            name="searchTerm"
             control={control}
             placeholder="Select your Genre"
           />
@@ -54,6 +57,7 @@ export default function Allbooks() {
             name="publicationDate"
             control={control}
             placeholder="Select your Genre"
+            allowClear={true}
           />
         </div>
         <div className="mb-32 mt-10">

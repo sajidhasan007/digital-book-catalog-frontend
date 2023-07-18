@@ -25,7 +25,7 @@ export const DatePickerControl: FC<DatePickerProps> = ({
   defaultValue,
   disabled = false,
   placeholder = '2022-01-01',
-  format = 'YYYY-MM-DD',
+  format = 'YYYY',
   className = '',
   allowClear = false,
   checkAdult = false,
@@ -52,7 +52,7 @@ export const DatePickerControl: FC<DatePickerProps> = ({
             placeholder={placeholder}
             value={field.value ? dayjs(field.value) : null}
             placement={'bottomLeft'}
-            format={'MM-D-YYYY h:mm'}
+            format={'YYYY'}
             onChange={(e) => {
               onChangeField && onChangeField();
               field.onChange(e ? e.toDate() : null);
