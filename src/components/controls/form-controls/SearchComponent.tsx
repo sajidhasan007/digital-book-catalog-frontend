@@ -1,7 +1,8 @@
-import { FC, ChangeEvent } from "react";
-import { Controller } from "react-hook-form";
-import { Input } from "antd";
-import { BiSearch } from "react-icons/bi";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC, ChangeEvent } from 'react';
+import { Controller } from 'react-hook-form';
+import { Input } from 'antd';
+import { BiSearch } from 'react-icons/bi';
 
 type InputEvent = ChangeEvent<HTMLInputElement>;
 
@@ -15,7 +16,7 @@ interface SearchControlProps {
   autoComplete?: string;
   className?: string;
   msg?: string;
-  size?: "small" | "middle" | "large";
+  size?: 'small' | 'middle' | 'large';
   toUpper?: boolean;
   maxLength?: number;
   number?: boolean;
@@ -30,16 +31,15 @@ export const SearchControl: FC<SearchControlProps> = ({
   errors,
   msg,
   disabled = false,
-  placeholder = "",
-  autoComplete = "",
-  className = "",
-  size = "middle",
-  defaultValue = "",
+  placeholder = '',
+  autoComplete = '',
+  className = '',
+  size = 'middle',
+  defaultValue = '',
   toUpper = false,
   onChangeField,
   maxLength = 999999,
   isGoNextField = false,
-  prefix = "",
   allowClear = true,
   number = false,
 }) => {
@@ -58,7 +58,7 @@ export const SearchControl: FC<SearchControlProps> = ({
       e.target.value =
         parseInt(e.target.value) || parseInt(e.target.value) === 0
           ? e.target.value
-          : "";
+          : '';
     } else {
       e.target.value = toUpper ? e.target.value.toUpperCase() : e.target.value;
     }
@@ -76,10 +76,10 @@ export const SearchControl: FC<SearchControlProps> = ({
           <Input
             allowClear={allowClear}
             {...field}
-            type={"search"}
+            type={'search'}
             id={name}
             className={`rounded  py-2    ${className} `}
-            status={errMsg && "error"}
+            status={errMsg && 'error'}
             size={size}
             disabled={disabled}
             placeholder={placeholder}

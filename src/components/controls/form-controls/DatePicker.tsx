@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from 'react';
 import { Controller } from 'react-hook-form';
-import type { RangePickerProps } from 'antd/es/date-picker';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 
@@ -22,14 +23,12 @@ export const DatePickerControl: FC<DatePickerProps> = ({
   name,
   control,
   errors,
-  defaultValue,
   disabled = false,
   placeholder = '2022-01-01',
-  format = 'YYYY',
+
   className = '',
   allowClear = false,
-  checkAdult = false,
-  showTime = false,
+
   onChangeField,
 }) => {
   const errMsg = errors?.[name]?.message;

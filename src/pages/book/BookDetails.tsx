@@ -28,12 +28,8 @@ export default function BookDetails() {
   };
 
   const { data: book, isLoading } = useSingleBookQuery(id);
-  const [
-    deleteBook,
-    { data: deleteData, isSuccess: deleteSuccess, isLoading: deleteLoading },
-  ] = useDleteBookMutation();
-  const { data: review, isLoading: isReviewLoading } =
-    useGetBookReviewQuery(id);
+  const [deleteBook, { isSuccess: deleteSuccess }] = useDleteBookMutation();
+  const { data: review } = useGetBookReviewQuery(id);
 
   if (isLoading) {
     return (
@@ -135,6 +131,7 @@ export default function BookDetails() {
           </div>
           <div>
             {review?.data.length > 0 ? (
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               review?.data?.map((review: any) => <ReviewCard review={review} />)
             ) : (
               <div className="h-52 flex justify-center items-center">

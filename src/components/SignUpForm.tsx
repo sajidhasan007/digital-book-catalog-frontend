@@ -1,5 +1,6 @@
 'use client';
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -32,12 +33,6 @@ export function SignupForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<SignupFormInputs>();
   const [messageApi, contextHolder] = message.useMessage();
 
-  const successMsg = (msg: string) => {
-    messageApi.open({
-      type: 'success',
-      content: msg,
-    });
-  };
   const errorMsg = (msg: string) => {
     messageApi.open({
       type: 'error',

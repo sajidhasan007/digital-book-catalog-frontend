@@ -5,12 +5,11 @@ import { Spin } from 'antd';
 import { genreOptions, IBook } from '@/types/globalTypes';
 import { useForm } from 'react-hook-form';
 import { DatePicker, SearchControl, Select } from '@/components/controls';
-import { useEffect } from 'react';
 import { removeFalsyValues } from '@/lib/utils';
 import dayjs from 'dayjs';
 
 export default function Allbooks() {
-  const { control, watch, handleSubmit, reset } = useForm({
+  const { control, watch } = useForm({
     defaultValues: {
       genre: null,
       searchTerm: '',
@@ -26,7 +25,7 @@ export default function Allbooks() {
     publicationDate: publicationDate && dayjs(publicationDate).format('YYYY'),
   };
   const newParams = removeFalsyValues(param);
-  const { data, isLoading, error } = useGetBooksQuery(newParams);
+  const { data, isLoading } = useGetBooksQuery(newParams);
 
   if (isLoading) {
     return (

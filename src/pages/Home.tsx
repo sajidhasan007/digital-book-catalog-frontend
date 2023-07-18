@@ -7,7 +7,7 @@ import { IBook } from '@/types/globalTypes';
 import { Spin } from 'antd';
 
 export default function Home() {
-  const { data, isLoading, error } = useGetBooksQuery(undefined);
+  const { data, isLoading } = useGetBooksQuery(undefined);
 
   if (isLoading) {
     return (

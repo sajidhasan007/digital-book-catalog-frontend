@@ -1,6 +1,8 @@
-import { FC, useState, useEffect } from "react";
-import { Controller } from "react-hook-form";
-import { Input } from "antd";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC } from 'react';
+import { Controller } from 'react-hook-form';
+import { Input } from 'antd';
 
 interface TextareaControlProps {
   name: string;
@@ -20,9 +22,9 @@ export const TextareaControl: FC<TextareaControlProps> = ({
   errors,
   msg,
   disabled = false,
-  placeholder = "",
-  className = "",
-  width = "w-full",
+  placeholder = '',
+  className = '',
+  width = 'w-full',
   onChangeValue,
 }) => {
   const errMsg = msg ? msg : errors?.[name]?.message;
@@ -38,7 +40,7 @@ export const TextareaControl: FC<TextareaControlProps> = ({
             disabled={disabled}
             className={`${width} ${className}`}
             autoSize={{ minRows: 3, maxRows: 6 }}
-            placeholder={placeholder || "Enter text here..."}
+            placeholder={placeholder || 'Enter text here...'}
             onChange={(e) => {
               onChangeValue && onChangeValue(e.target.value);
               field.onChange(e);
@@ -46,7 +48,7 @@ export const TextareaControl: FC<TextareaControlProps> = ({
           />
         )}
       />
-      <p className={`text-red-600 text-xs ${msg && "-bottom-3 left-1"} block`}>
+      <p className={`text-red-600 text-xs ${msg && '-bottom-3 left-1'} block`}>
         {errMsg}
       </p>
     </>

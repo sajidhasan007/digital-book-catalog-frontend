@@ -9,7 +9,6 @@ import {
 } from '@/redux/features/books/bookApi';
 import { LoadingOutlined } from '@ant-design/icons';
 import { genreOptions, option } from '@/types/globalTypes';
-import dayjs from 'dayjs';
 import { Navigate } from 'react-router-dom';
 
 interface IBook {
@@ -22,6 +21,7 @@ interface IBook {
 interface IWriteReview {
   isUpdate?: boolean;
   bookId?: string | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setIsModalOpen?: any;
 }
 export const AddNewBookForm: FC<IWriteReview> = ({
@@ -37,16 +37,10 @@ export const AddNewBookForm: FC<IWriteReview> = ({
       content: msg,
     });
   };
-  const errorMsg = (msg: string) => {
-    messageApi.open({
-      type: 'error',
-      content: msg,
-    });
-  };
 
   const {
     control,
-    watch,
+
     handleSubmit,
     reset,
     formState: { isValid, isDirty },
@@ -70,14 +64,11 @@ export const AddNewBookForm: FC<IWriteReview> = ({
         publicationDate: new Date(bookDetails?.data?.publicationDate),
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Add an empty dependency array
 
-  const [createBook, { data, isSuccess, error, isLoading }] =
-    useCreateBookMutation();
-  const [
-    updateBook,
-    { data: updateData, isSuccess: updateSuccess, isLoading: updateLoading },
-  ] = useUpdateBookMutation();
+  const [createBook, { isSuccess, isLoading }] = useCreateBookMutation();
+  const [updateBook, { isSuccess: updateSuccess }] = useUpdateBookMutation();
 
   if (isSuccess) {
     successMsg('Book added successfully');

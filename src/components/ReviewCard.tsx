@@ -1,4 +1,5 @@
-import { IBook } from '@/types/globalTypes';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Avatar, Rate } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 

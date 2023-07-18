@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import logo from '../assets/images/book_logo.png';
@@ -6,10 +7,7 @@ import { useState } from 'react';
 
 export default function Navbar() {
   const userToken = Cookies.get('token');
-  const userName = Cookies.get('name');
-  const [token, setToken] = useState<string | null>(
-    Cookies.get('token') as string
-  );
+  const [, setToken] = useState<string | null>(Cookies.get('token') as string);
   const logOut = () => {
     // console.log('log out ');
     Cookies.remove('token');

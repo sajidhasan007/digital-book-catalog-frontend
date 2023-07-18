@@ -1,7 +1,8 @@
-import { FC, useState, useEffect } from "react";
-import { Controller } from "react-hook-form";
-import { Rate } from "antd";
-import { BsStar } from "react-icons/bs";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC, useState } from 'react';
+import { Controller } from 'react-hook-form';
+import { Rate } from 'antd';
 
 interface RateControlProps {
   name: string;
@@ -20,12 +21,12 @@ export const RateControl: FC<RateControlProps> = ({
   errors,
   msg,
   disabled = false,
-  className = "",
+  className = '',
   onChangeRate,
   allowHalf = false,
 }) => {
   const errMsg = msg ? msg : errors?.[name]?.message;
-  const [rateHover, setRateHover] = useState(-1);
+  const [, setRateHover] = useState(-1);
 
   // const handleRateChange = (value: number) => {
   //   console.log("my rate value is ", value);
@@ -54,7 +55,7 @@ export const RateControl: FC<RateControlProps> = ({
           />
         )}
       />
-      <p className={`text-red-600 text-xs ${msg && "-bottom-3 left-1"} block`}>
+      <p className={`text-red-600 text-xs ${msg && '-bottom-3 left-1'} block`}>
         {errMsg}
       </p>
     </>

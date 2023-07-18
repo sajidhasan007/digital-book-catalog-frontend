@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC } from 'react';
 import { Modal, Button, message, Spin } from 'antd';
 import { useForm } from 'react-hook-form';
@@ -28,12 +30,7 @@ export const WriteReview: FC<IWriteReview> = ({
       content: msg,
     });
   };
-  const errorMsg = (msg: string) => {
-    messageApi.open({
-      type: 'error',
-      content: msg,
-    });
-  };
+
   const {
     control,
     handleSubmit,
@@ -45,11 +42,11 @@ export const WriteReview: FC<IWriteReview> = ({
     },
   });
 
-  const [createReview, { data, isSuccess, error, isLoading }] =
-    useCreateReviewMutation();
+  const [createReview, { isSuccess, isLoading }] = useCreateReviewMutation();
 
   if (isSuccess) {
     successMsg('Review added successfully');
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     toggleModal!();
   }
 

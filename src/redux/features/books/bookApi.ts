@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { api } from '@/redux/api/apiSlice';
 import Cookies from 'js-cookie';
 

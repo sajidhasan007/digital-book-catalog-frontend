@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FC, useState, useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 import { Select } from 'antd';
 import { option } from '@/types/globalTypes';
-
-const { Option } = Select;
 
 interface SelectControlProps {
   name: string;
@@ -34,7 +34,7 @@ export const SelectControl: FC<SelectControlProps> = ({
   onChangeOption,
   showSearch = true,
 }) => {
-  const [optionList, setOptionList] = useState<any>([]);
+  const [, setOptionList] = useState<any>([]);
 
   useEffect(() => {
     setOptionList(options);

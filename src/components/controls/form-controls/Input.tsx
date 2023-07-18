@@ -1,7 +1,8 @@
-import { FC, ChangeEvent } from "react";
-import { Controller } from "react-hook-form";
-import { Input } from "antd";
-import { BiSearch } from "react-icons/bi";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { FC, ChangeEvent } from 'react';
+import { Controller } from 'react-hook-form';
+import { Input } from 'antd';
 
 type InputEvent = ChangeEvent<HTMLInputElement>;
 
@@ -16,7 +17,7 @@ interface InputControlProps {
   autoComplete?: string;
   className?: string;
   msg?: string;
-  size?: "small" | "middle" | "large";
+  size?: 'small' | 'middle' | 'large';
   toUpper?: boolean;
   maxLength?: number;
   number?: boolean;
@@ -27,21 +28,21 @@ interface InputControlProps {
 }
 export const InputControl: FC<InputControlProps> = ({
   name,
-  type = "text",
+  type = 'text',
   control,
   errors,
   msg,
   disabled = false,
-  placeholder = "",
-  autoComplete = "",
-  className = "",
-  size = "middle",
-  defaultValue = "",
+  placeholder = '',
+  autoComplete = '',
+  className = '',
+  size = 'middle',
+  defaultValue = '',
   toUpper = false,
   onChangeField,
   maxLength = 999999,
   isGoNextField = false,
-  prefix = "",
+  prefix = '',
   allowClear = false,
   number = false,
 }) => {
@@ -60,7 +61,7 @@ export const InputControl: FC<InputControlProps> = ({
       e.target.value =
         parseInt(e.target.value) || parseInt(e.target.value) === 0
           ? e.target.value
-          : "";
+          : '';
     } else {
       e.target.value = toUpper ? e.target.value.toUpperCase() : e.target.value;
     }
@@ -81,7 +82,7 @@ export const InputControl: FC<InputControlProps> = ({
             type={type}
             id={name}
             className={`rounded  py-2    ${className} `}
-            status={errMsg && "error"}
+            status={errMsg && 'error'}
             size={size}
             disabled={disabled}
             placeholder={placeholder}
@@ -89,7 +90,7 @@ export const InputControl: FC<InputControlProps> = ({
             onInput={onInputChange}
             autoComplete={autoComplete}
             maxLength={maxLength}
-            prefix={prefix ? prefix : ""}
+            prefix={prefix ? prefix : ''}
           />
         )}
       />

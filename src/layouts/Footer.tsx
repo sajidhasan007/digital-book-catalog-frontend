@@ -1,4 +1,3 @@
-import React from 'react';
 import logo from '@/assets/images/book_logo.png';
 import { RiFacebookBoxFill, RiInstagramLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
