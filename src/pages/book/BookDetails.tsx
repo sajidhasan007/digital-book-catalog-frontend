@@ -6,7 +6,10 @@ import { WriteReview } from '@/components/WriteReviewModal';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
+  useCreateBookMutation,
+  useCreateFavoriteListMutation,
   useDleteBookMutation,
+  useDleteFavoriteListMutation,
   useGetBookReviewQuery,
   useSingleBookQuery,
 } from '@/redux/features/books/bookApi';
@@ -14,10 +17,13 @@ import { AddNewBookForm } from '@/components/AddNewBookForm';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import dayjs from 'dayjs';
 import { Navigate } from 'react-router-dom';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 export default function BookDetails() {
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isFavourite, setIsFavourite] = useState(false);
+
   const { id } = useParams();
   const reviewToggleFilterModal = () => {
     setIsReviewModalVisible(!isReviewModalVisible);
@@ -30,6 +36,8 @@ export default function BookDetails() {
   const { data: book, isLoading } = useSingleBookQuery(id);
   const [deleteBook, { isSuccess: deleteSuccess }] = useDleteBookMutation();
   const { data: review } = useGetBookReviewQuery(id);
+  const [createFavoriteList] = useCreateFavoriteListMutation();
+  const [deleteFavoriteList] = useDleteFavoriteListMutation();
 
   if (isLoading) {
     return (
@@ -48,19 +56,40 @@ export default function BookDetails() {
     deleteBook(id);
   };
 
+  const handleFavouriteList = async () => {
+    createFavoriteList({ book: id });
+    setIsFavourite(!isFavourite);
+  };
+
+  const handleRemoveFavouriteList = async () => {
+    deleteFavoriteList({ id: id, data: id });
+    setIsFavourite(!isFavourite);
+  };
+
   return (
     <>
       <div className="content-container">
         <h1 className="text-2xl font-black text-primary my-4">Book Details</h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4  ">
-          <div>
+          <div className="relative">
             <div className="h-[400px] w-full overflow-hidden">
               <img
                 className="object-cover h-full w-full"
                 src={noImage}
                 alt="book"
               />
+            </div>
+            <div className="cursor-pointer">
+              {isFavourite ? (
+                <div onClick={() => handleRemoveFavouriteList()}>
+                  <AiFillHeart className="text-red-600 text-2xl absolute z-50 top-0 " />
+                </div>
+              ) : (
+                <div onClick={() => handleFavouriteList()}>
+                  <AiOutlineHeart className="text-red-600 text-2xl absolute z-50 top-0 " />
+                </div>
+              )}
             </div>
           </div>
           <div>

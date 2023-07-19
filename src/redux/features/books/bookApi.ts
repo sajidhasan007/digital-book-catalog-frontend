@@ -66,6 +66,30 @@ const bookApi = api.injectEndpoints({
       }),
       invalidatesTags: ['comments'],
     }),
+    getFavoriteList: builder.query({
+      query: (id) => ({
+        url: `/favourite-list/${id}`,
+        headers: { authorization: Cookies.get('token') },
+      }),
+    }),
+    createFavoriteList: builder.mutation({
+      query: (data) => ({
+        url: `/favourite-list/create-favourite`,
+        method: 'POST',
+        body: { ...data },
+        headers: { authorization: Cookies.get('token') },
+      }),
+      invalidatesTags: ['comments'],
+    }),
+    dleteFavoriteList: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/favourite-list/${id?.id}`,
+        method: 'DELETE',
+        body: { ...data },
+        headers: { authorization: Cookies.get('token') },
+      }),
+      invalidatesTags: ['bookList'],
+    }),
   }),
 });
 
@@ -77,4 +101,7 @@ export const {
   useDleteBookMutation,
   useGetBookReviewQuery,
   useCreateReviewMutation,
+  useCreateFavoriteListMutation,
+  useDleteFavoriteListMutation,
+  useGetFavoriteListQuery,
 } = bookApi;
