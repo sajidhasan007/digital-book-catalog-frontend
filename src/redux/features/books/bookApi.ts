@@ -21,7 +21,10 @@ const bookApi = api.injectEndpoints({
       providesTags: ['bookList'],
     }),
     singleBook: builder.query({
-      query: (id) => `/book/${id}`,
+      query: (id) => ({
+        url: `/book/${id}`,
+        headers: { authorization: Cookies.get('token') },
+      }),
       providesTags: ['singleBook'],
     }),
     createBook: builder.mutation({
@@ -82,10 +85,10 @@ const bookApi = api.injectEndpoints({
       invalidatesTags: ['comments'],
     }),
     dleteFavoriteList: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/favourite-list/${id?.id}`,
+      query: (id) => ({
+        url: `/favourite-list/` + id,
         method: 'DELETE',
-        body: { ...data },
+        body: { book: id },
         headers: { authorization: Cookies.get('token') },
       }),
       invalidatesTags: ['bookList'],

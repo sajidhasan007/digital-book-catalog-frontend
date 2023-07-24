@@ -62,8 +62,19 @@ export default function BookDetails() {
   };
 
   const handleRemoveFavouriteList = async () => {
-    deleteFavoriteList({ id: id, data: id });
-    setIsFavourite(!isFavourite);
+    const options = {
+      id: id,
+      data: { book: id },
+    };
+
+    console.log('my delete options are = ', options);
+
+    if (id) {
+      deleteFavoriteList(id);
+      setIsFavourite(!isFavourite);
+    } else {
+      console.error('Error: ID is undefined.');
+    }
   };
 
   return (
